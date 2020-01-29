@@ -125,4 +125,29 @@ boxplot(WATER_H,AIR_H)
 qqplot(WATER_H,AIR_H)
 
 #Filtering
+EPILand<-EPI[!Landlock]
+Eland<-EPILand[!is.na(EPILand)]
+Eland
+hist(Eland)
+hist(Eland, seq(30., 95., 1.0), prob=TRUE)
 
+#Repeating steps with Water Treatment CSV
+Water_data <-read.csv(file.choose(), header=T)
+Water_data
+attach(Water_data)
+head(Water_data)
+
+#data frames
+Water_data[1,]       #shows all columns for 1st row
+Water_data[,1]       #shows all rows for 1st column
+Water_data[,'PH.E']       #shows all rows for 'PH.E' column
+Water_data[1:5, c('DATE', 'Q.E')]     #shows first 5 rows for DATE and Q.E cols
+
+#distributions
+boxplot(COND.E,COND.P)
+qqplot(COND.E,COND.P)
+
+#filtering
+PHE<-PH.E[!is.na(PH.E)]
+PHE
+hist(PHE)

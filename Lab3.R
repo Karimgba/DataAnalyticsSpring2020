@@ -42,7 +42,7 @@ fit2M <- ctree(Mileage~Price + Country + Reliability + Type, data=na.omit(cu.sum
 summary(fit2M)
 # plot tree
 plot(fit2M, uniform=TRUE, main="CI Tree Tree for Mileage ")
-text(fit2M, use.n=TRUE, all=TRUE, cex=.8)
+text(tree, y=NULL, use.n=TRUE, all=TRUE, cex=.8)
 
 ####### Lab3_ctree3 ########
 fitK <- ctree(Kyphosis ~ Age + Number + Start, data=kyphosis)

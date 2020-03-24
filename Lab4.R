@@ -57,4 +57,51 @@ cg<-nyt1$Gender[training]
 true.labels<-nyt1$Gender[testing]
 library(class)
 knn(train,test,cg,k=5)
-attributes(.Last.value) 
+attributes(.Last.value)
+
+# Titanic rpart
+library(rpart)
+library(rpart.plot)
+
+data(Titanic)
+require(rpart)
+Titanic_rpart <- rpart(Survived ~ ., data=Titanic)
+plot(Titanic_rpart) # try some different plot options
+text(Titanic_rpart) # try some different text options
+
+library(rattle)   #using rattle for a different plotting option
+fancyRpartPlot(Titanic_rpart)
+
+#Titanic ctree
+require(party)
+
+Titanic_ctree<-ctree(Survived ~ ., data=Titanic)
+plot(Titanic_ctree)
+
+#Titanic hclust
+require(graphics)
+Titanic_hclust <- hclust(dist(Titanic), "ave")
+plot(Titanic_hclust)
+
+#Titanic randomForest
+library(randomForest)
+set.seed(100)
+train <- sample(nrow(Titanic), 0.7*nrow(Titanic), replace=FALSE)
+TrainSet <- Titanic[train]
+ValidSet <- Titanic[-train]
+
+forest_model <- randomForest(Survived ~ ., data=TrainSet, importance=TRUE)
+forest_model
+
+forest_model2 <- randomForest(Survived ~ ., data=TrainSet, ntree=500, mtry=6, importance=TRUE)
+forest_model2
+
+predTrain <- predict(forest_model2, TrainSet, type="class")
+table(predTrain, TrainSet$Survived)
+
+predValid <- predict(forest_model2, ValidSet, type="class")
+table(predValid, ValidSet$Survived)
+
+
+
+

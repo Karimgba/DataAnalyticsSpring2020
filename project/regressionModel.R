@@ -93,7 +93,14 @@ summary(world_model_BUPPSRY) #Multiple R-squared:  0.1013,	Adjusted R-squared:  
 ############ model plots #################
 library(ggplot2)
 
-ggplot(world_model_TRY, aes(x=TIME, y=Value)) + geom_point(aes(color=world_data_TRY$LOCATION))+geom_smooth(method=lm)
+world_TRY_regression_plot <- ggplot(world_model_TRY, aes(x=TIME, y=Value)) + geom_point(aes(color=world_data_TRY$LOCATION))+labs(color="Countries")+geom_smooth(method=lm)+ggtitle("World Tertiary Education Regression")+xlab("Years")+ylab("Percentage of Adults")
+world_TRY_regression_plot
+
+world_TRY_regression_plot_MEN <- ggplot(world_model_TRY_MEN, aes(x=TIME, y=Value)) + geom_point(aes(color=world_data_TRY$LOCATION))+labs(color="Countries")+geom_smooth(method=lm)+ggtitle("World Tertiary Education Regression (Men)")+xlab("Years")+ylab("Percentage of Adults")
+world_TRY_regression_plot_MEN
+
+world_TRY_regression_plot_WOMEN <- ggplot(world_model_TRY_WOMEN, aes(x=TIME, y=Value)) + geom_point(aes(color=world_data_TRY$LOCATION))+labs(color="Countries")+geom_smooth(method=lm)+ggtitle("World Tertiary Education Regression (Women)")+xlab("Years")+ylab("Percentage of Adults")
+world_TRY_regression_plot_WOMEN
 
 ggplot(USA_linear_model_TRY, aes(x=TIME, y=Value)) + geom_point()+geom_smooth(method=lm)
 
